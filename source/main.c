@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
   t_array_foreach(order_ways, printf, NULL);
   
-
+	// setf;
   return 0;
 }
 
