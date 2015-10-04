@@ -1,0 +1,95 @@
+Pucha :v
+xD
+ como has pensado tu?
+espera, primero la idea no es ordenar las cosas con los 3? osea mmm ahi no hay mucho tema de discusion, no?
+No exactamente.
+Bueno, mira. yo lo pense asi :v
+
+1. tenemos que leer los archivos
+2. elegimos lo que usaremos como criterio de ordenacion
+3. para cada banco
+	3.1. Iniciamos un contador de tiempo
+	3.2. ordemamos los registros dependiendo del criterio
+	3.3. leemos el archivo de personas
+		3.3.1. calculamos esa situacion que nos piden
+		3.3.2. mostramos los calculos para banco 1 y regresamos 3. para continuar con el otro banco
+
+# que dices? :v
+# uy si uso recursion :v ya jajaja
+listo :v
+# bueno.
+usemos TADs :v
+
+un tipo de array de punteros. lo vi en el repo que paso fredy
+ya
+tipo listas
+
+variables internas:
+	tamano
+	vector
+
+crear_lista -> lista
+agregar_lemento -> lista
+eliminar_elemento -> lista
+buscar_elemento -> elemento
+
+no se que mas... dale una checkeada a la situacion de listas en el repo que paso fredy
+en git pucpeople
+
+# bueno, ahora Bnco usario un tipo lista.
+# para cada elemento de su vector...
+# que cosas hace el banco?
+# deja ver espera
+# cada banco decide que linea de credito le corresponde
+# y eso con los calculos que se deben sacar 	
+# eso de cada mmm requisito que pide el banco (lo que esta en la tabla del pdf) lo podriamos hacer con mmmm
+# bueno, pienso que el vector del banco apuntaria a    ya ta sigue :v
+# apuntaria a las 3 bases de datos, a la lista de personas, los criterios de ordenacion
+# y finalmente la funcion de ordenacion :v y calculo de credito
+# que opinas? mmm agree :v 
+# entonces
+
+Banco
+variables internas:
+
+	lista dbReniec
+	lista dbInfocorp
+	lista dbSunat
+	lista personas
+	lista criterios
+	func_ordenacion
+	calculo_crediticio
+	buscaPersona
+
+# yasta creo :v
+# sip... '
+: ahora persona
+
+Tipo Persona
+variables internas
+	dni
+	nombres
+	apellido_paterno
+	apellido_materno
+	ano_de_nacimiento :vvvvv
+
+# nada mas por que las bases de datos tiene el resto...
+# no, esta bien creo.
+# por que lcada db tiene un tipo extra :v
+# quiero decir. Tiene otros datos.
+# datos que no nos importan por ahora :v# 
+# sorry si estoy un poco distraida, mi casa esta un toque movida ahorita -.-
+# esta bien, creo que la base de datos se puede agregar algo mas. en su momento
+# ya esta.
+# mira, hagamos algo.
+# concentrate en entender el algoritmo.
+# luego en la noche confredy lo vemos otra vez
+# y luego manana lo terminamos de completar.
+# vale? :)
+# totally agree :v
+# lusto ahorita voy a pushear esto y hablamos por ws
+# me desconecto
+
+
+	
+
