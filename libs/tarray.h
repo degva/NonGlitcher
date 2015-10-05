@@ -24,5 +24,4 @@ void t_bubble_sort(TArr * src, int crit1, int crit2);
 void t_shake_sort(TArr * src, int crit1, int crit2);
 
 
-
 #endif
