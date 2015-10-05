@@ -1,5 +1,9 @@
 #ifndef TBANCO
 #define TBANCO
+#include "tarray.h"
+
+
+
 
 // Funcion que devuelve el credito usando la formula del
 // banco B
@@ -12,6 +16,6 @@ void print_person (TPersona * persona, float credit);
 
 // Lee el archivo persona y para cada persona
 // calcula el credito - tambien inicia el tiempo de ejecucion.
-void start (TArr *data, const char * filepath, const char * delimiter);
+void start (int crit1, int crit2);
 
 #endif

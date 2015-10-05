@@ -32,3 +32,12 @@ void t_array_remove_last (TArr * array) {
   array->len--;
   array->vector = realloc(array, sizeof(tpointer) * array->len);
 }
+
+void t_array_full_copy(TArr * src, TArr * des) {
+  int i;
+  des->len = src->len;
+  for (i=0; i<src->len; i++) {
+    t_array_append( 
+  }
+  memcpy(des->vector, src->vector);
+}
