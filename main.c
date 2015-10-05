@@ -1,18 +1,21 @@
 #include <stdio.h>
-#include "tlib.h"
+#include "tmsg.h"
+#include "tarray.h"
+#include "menu.h"
 
 int main(int argc, char *argv[])
 {
-  // Array con los criterios disponibles
-  TArray order_ways;
-  t_array_append(order_ways, INT_TO_POINTER(23));
-  t_array_append(order_ways, INT_TO_POINTER(43));
-  t_array_append(order_ways, INT_TO_POINTER(21));
-  t_array_append(order_ways, INT_TO_POINTER(55));
+  TArr *test = t_array_new();
+  char msg[] = "This is a list of things. Select one of them";
+  TMsg *opt;
+ 
+  t_array_append(test, t_msg_new("This is it..."));
+  t_array_append(test, t_msg_new("This is another option"));
+  t_array_append(test, t_msg_new("Opt 3"));
 
-  t_array_foreach(order_ways, printf, NULL);
-  
-	// setf;
+  opt = retrieve_opt(test, msg);
+  printf("You've selected \"%s\"\n", opt->msg);
+
   return 0;
 }
 
