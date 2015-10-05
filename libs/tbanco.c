@@ -4,7 +4,7 @@
 
 
 //lee el archivo del DB_SUNAT
-TArr *sunat;
+TArr *people;
 people= p_from_file ("DB_SUNAT.txt","DB_RENIEC.txt","DB_INFOCORP",",");
 
 
@@ -114,12 +114,13 @@ void start (int crit1, int crit2) {
   copiaBancoC = t_array_new();
 
   // leemos las bases de datos
-  leer_bases(baseDatos);
+  TArr *persona;
+  persona= p_from_file ("DB_SUNAT.txt","DB_RENIEC.txt","DB_INFOCORP",",")
 
   // Hacemos copias enteras de las bases de datos
-  t_array_full_copy(baseDatos, copiaBancoA);
-  t_array_full_copy(baseDatos, copiaBancoB);
-  t_array_full_copy(baseDatos, copiaBancoC);
+  t_array_full_copy(persona, copiaBancoA);
+  t_array_full_copy(persona, copiaBancoB);
+  t_array_full_copy(persona, copiaBancoC);
 
   // Hace una copia para banco a y hace el sort respectivo a la copia de la DB
   // -- inicia tiempo para banco Ai
