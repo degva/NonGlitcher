@@ -22,6 +22,8 @@ typedef enum {
   PERSONA_CITY
 } PersonaCriteria;
 
+
+
 // Compare 2 persons by first name
 int p_cmp_fn (tpointer a, tpointer b);
 // Compare 2 persons by last name f

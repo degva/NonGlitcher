@@ -25,7 +25,27 @@ int p_cmp_city (tpointer a, tpointer b) {
   return strcmp(PERSONA(a)->city, PERSONA(b)->city);
 }
 
-Persona * persona_from_string (char * str, const char * delimiter ) {
+TPersona *buscaPersona (TArr *data, TPersona persona){
+  int max,min;
+  max = data->len;
+  min = 0;
+  while (min < max){
+	mid = min + (max-min)/2;
+	if ((PERSONA(data[min])->dni) == persona->dni){
+	   return PERSONA(data[min]);
+	}
+	else if ((PERSONA(data[min])->dni) < persona->dni){
+	   min = mid + 1;
+	}
+	else {
+	   max = mid - 1;
+	}
+  }
+  return NULL;
+}
+
+
+TPersona * persona_from_string (char * str, const char * delimiter ) {
   Persona *persona;
 
   int i;
