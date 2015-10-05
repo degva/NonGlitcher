@@ -4,3 +4,7 @@
   1.2. ordenamos el primer arreglo
   1.3. ingresamos los datos del resto de base de datos.
 2. Iniciamos Banco A, Banco B y Banco C.
+
+Lee el archivo personas.txt
+para cada persona, calcular credito
+imprimir credito persona

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "tpersona.h""
+#include "tpersona.h"
 
 #define PERSONA(p)    ((Persona *)(p))
 
