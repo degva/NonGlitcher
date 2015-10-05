@@ -2,6 +2,15 @@
 #include "tpersona.h"
 #include "tarray.h"
 
+
+//lee el archivo del DB_SUNAT
+TArr *sunat;
+people= p_from_file ("DB_SUNAT.txt","DB_RENIEC.txt","DB_INFOCORP",",");
+
+
+
+
+
 float calc_credit_a (TArr * data, TPersona persona) {
   return 0;
 }
