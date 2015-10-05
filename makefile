@@ -37,4 +37,4 @@ app: $(OBJS)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o $(BLD)/*
+	rm -f $(ODIR)/*.o $(BLD)/app
