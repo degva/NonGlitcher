@@ -41,3 +41,27 @@ void t_array_full_copy(TArr * src, TArr * des) {
   }
   memcpy(des->vector, src->vector);
 }
+
+void returnval (  int crit1 ){
+  if (crit1 == PERSONA_FIRST_NAME)
+    return "dni"
+
+
+}
+//void t_bubble_sort (TArr * array, TCompDataFunc cmp_func){
+void t_bubble_sort (TArr * array, TArr * cmp_funcs){
+  int c, d;    
+  for (c = 0 ; c < ( 1000 - 1 ); c++)
+  {
+    for (d = 0 ; d < 1000 - c - 1; d++)
+    {
+      if ((TCompDataFunc) t_array_index(cmp_funcs, 0)( array->vector[c] ,array->vector[d]) < 0))) {
+        t_swap (array->vector[c], array->vector[d]);
+      } else {
+        if ((TCompDataFunc) t_array_index(cmp_funcs, 1)( array->vector[c] ,array->vector[d]) < 0) {
+          t_swap (array->vector[c], array->vector[d]);
+        }
+      }
+    }
+
+}

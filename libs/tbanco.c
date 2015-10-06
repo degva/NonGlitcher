@@ -117,6 +117,7 @@ void start (int crit1, int crit2) {
   TArr *persona;
   persona= p_from_file ("DB_SUNAT.txt","DB_RENIEC.txt","DB_INFOCORP",",")
 
+  //
   // Hacemos copias enteras de las bases de datos
   t_array_full_copy(persona, copiaBancoA);
   t_array_full_copy(persona, copiaBancoB);
