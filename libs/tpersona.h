@@ -8,8 +8,8 @@ struct _TPersona {
   const char *first_name;
   const char *last_name_f;
   const char *last_name_m;
-  long dni;
-  long ruc;
+  int dni;
+  int ruc;
   const char *fecha;
   const char *estado;
   int monto;
@@ -24,8 +24,8 @@ struct _DB_Sunat {
   const char *first_name;
   const char *last_name_f;
   const char *last_name_m;
-  long dni;
-  long ruc;  
+  int dni;
+  int ruc;  
   const char *fecha;
   const char *estado;
   int monto;
@@ -37,7 +37,7 @@ struct _DB_Reniec {
   const char *first_name;
   const char *last_name_f;
   const char *last_name_m;
-  long dni;
+  int dni;
   const char *genero;
   TBoolean carga ;
 }; 
@@ -48,7 +48,7 @@ struct _DB_Infocorp {
   const char *first_name;
   const char *last_name_f;
   const char *last_name_m;
-  long dni;
+  int dni;
   int riesgo;
   
 }; 
@@ -72,13 +72,9 @@ int p_cmp_fn (tpointer a, tpointer b);
 int p_cmp_lnf (tpointer a, tpointer b);
 // Compare 2 persons by last name m
 int p_cmp_lnm (tpointer a, tpointer b);
-// copare by year
-int p_cmp_year (tpointer a, tpointer b);
-// copare by city
-int p_cmp_city (tpointer a, tpointer b);
 // Create a persona from a string
-Persona * persona_from_string(char * str, const char * delimiter);
+TPersona * persona_from_string(char * str, const char * delimiter);
 // read data from persona
-TArr * p_from_file (const char * filepath, const char * delimiter);
+TArr * p_from_file (const char * filepath_sunat,const char * filepath_reniec,const char * filepath_infocorp, const char * delimiter);
 
 #endif

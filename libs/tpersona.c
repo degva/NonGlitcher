@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "tpersona.h"
 
-#define PERSONA(p)    ((Persona *)(p))
+#define PERSONA(p)    ((TPersona *)(p))
 
 int p_cmp_fn (tpointer a, tpointer b) {
   return strcmp(PERSONA(a)->first_name, PERSONA(b)->first_name);
@@ -18,29 +19,21 @@ int p_cmp_lnm (tpointer a, tpointer b) {
   return strcmp(PERSONA(a)->last_name_m, PERSONA(b)->last_name_m);
 }
 
-int p_cmp_year (tpointer a, tpointer b) {
-  return PERSONA(a)->year - PERSONA(b)->year;
-}
-
-int p_cmp_city (tpointer a, tpointer b) {
-  return strcmp(PERSONA(a)->city, PERSONA(b)->city);
-}
-
-TPersona *buscaPersona (TArr *data, TPersona persona){
-  int max,min;
+TPersona *buscaPersona (TArr *data, TPersona * persona){
+  int max, min, mid;
   max = data->len;
   min = 0;
-  while (min < max){
-	mid = min + (max-min)/2;
-	if ((PERSONA(data[min])->dni) == persona->dni){
-	   return PERSONA(data[min]);
-	}
-	else if ((PERSONA(data[min])->dni) < persona->dni){
-	   min = mid + 1;
-	}
-	else {
-	   max = mid - 1;
-	}
+  while (min < max) {
+    mid = min + (max-min)/2;
+    if (PERSONA(data->vector[min])->dni == persona->dni){
+      return data->vector[min];
+    }
+    else if (PERSONA(data->vector[min])->dni < persona->dni){
+      min = mid + 1;
+    }
+    else {
+      max = mid - 1;
+    }
   }
   return NULL;
 }
@@ -56,7 +49,7 @@ DB_Sunat * persona_from_string_su(char * str, const char * delimiter ) {
     if (i == 0)
       field[i] = strdup (strtok (str, delimiter));
     else
-      field[i] = strok (NULL, delimiter);
+      field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
     else
@@ -65,14 +58,14 @@ DB_Sunat * persona_from_string_su(char * str, const char * delimiter ) {
   }
 
   sunat = malloc(sizeof(DB_Sunat));
-  sunat -> ruc = atoi (field[0]);
-  sunat -> dni = atoi (field[1]);
-  sunat -> firstname = strdup (field[2]);
+  sunat->ruc = atoi (field[0]);
+  sunat->dni = atoi (field[1]);
+  sunat->first_name = strdup (field[2]);
   sunat->last_name_f = strdup (field[3]);
   sunat->last_name_m = strdup (field[4]);
   sunat->fecha = strdup (field[5]);
   sunat->estado = strdup (field[6]);
-  sunat->monto = atoi  (field[7])
+  sunat->monto = atoi  (field[7]);
 
   return sunat;
 }
@@ -86,7 +79,7 @@ DB_Reniec * persona_from_string_re(char * str, const char * delimiter ) {
     if (i == 0)
       field[i] = strdup (strtok (str, delimiter));
     else
-      field[i] = strok (NULL, delimiter);
+      field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
     else
@@ -95,12 +88,15 @@ DB_Reniec * persona_from_string_re(char * str, const char * delimiter ) {
   }
 
   reniec = malloc(sizeof(DB_Sunat));
-  reniec -> dni = atoi (field[0]);
-  reniec -> firstname = strdup (field[1]);
+  reniec->dni = atoi (field[0]);
+  reniec->first_name = strdup (field[1]);
   reniec->last_name_f = strdup (field[2]);
   reniec->last_name_m = strdup (field[3]);
-  reniec-> genero= strdup(field[4]);
-  reniec -> carga = strdup(field [5]);
+  reniec->genero= strdup(field[4]);
+  if (strcmp(strdup(field[5]), "Si") == 0) 
+    reniec->carga = TRUE;
+  else
+    reniec->carga = FALSE;
 
   return reniec;
 }
@@ -114,7 +110,7 @@ DB_Infocorp * persona_from_string_in(char * str, const char * delimiter ) {
     if (i == 0)
       field[i] = strdup (strtok (str, delimiter));
     else
-      field[i] = strok (NULL, delimiter);
+      field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
     else
@@ -124,10 +120,10 @@ DB_Infocorp * persona_from_string_in(char * str, const char * delimiter ) {
 
   infocorp = malloc(sizeof(DB_Sunat));
   infocorp -> dni = atoi (field[0]);
-  infocorp -> firstname = strdup (field[1]);
+  infocorp -> first_name = strdup (field[1]);
   infocorp->last_name_f = strdup (field[2]);
   infocorp->last_name_m = strdup (field[3]);
-  infocorp->riesgo = strdup(field[4])
+  infocorp->riesgo = atoi (field[4]);
 
   return infocorp;
 }
@@ -142,7 +138,7 @@ TPersona * include_persona(const DB_Reniec * reniec, const DB_Sunat * sunat , co
   people -> ruc = sunat -> ruc;
   people -> fecha = sunat -> fecha;
   people -> estado = sunat -> estado;
-  people -> monto = reniec -> monto;
+  people -> monto = sunat -> monto;
   people -> genero = reniec -> genero;
   people -> carga= reniec -> carga;
   people ->riesgo =infocorp -> riesgo;
@@ -151,25 +147,29 @@ TPersona * include_persona(const DB_Reniec * reniec, const DB_Sunat * sunat , co
 }
 
 TArr * p_from_file (const char * filepath_sunat,const char * filepath_reniec,const char * filepath_infocorp, const char * delimiter) {
-  TArr *persona;
+  TArr *personas;
   FILE *f;
+  FILE *f1;
+  FILE *f2;
   char line[1000];
+  char line1[1000];
+  char line2[1000];
 
-  persona = t_array_new();
+  personas = t_array_new();
 
-  f = fopen(filepath_sunat, 'r');
-  f1 = fopen(filepath_infocorp, 'r');
-  f2 = fopen(filepath_reniec, 'r');
+  f = fopen(filepath_sunat, "r");
+  f1 = fopen(filepath_infocorp, "r");
+  f2 = fopen(filepath_reniec, "r");
 
   if (!f)
     goto handle_error;
 
   while (fgets (line, 1000, f) && fgets(line1,1000,f1) && fgets(line2,1000,f2)) {
-    TPersona *persona;
+    TPersona *people;
     DB_Sunat *sunat;
     DB_Reniec *reniec;
     DB_Infocorp *infocorp ;
-
+    
     reniec = persona_from_string_re(line1,delimiter);
     sunat = persona_from_string_su(line, delimiter);
     infocorp= persona_from_string_in(line2,delimiter);
@@ -177,16 +177,16 @@ TArr * p_from_file (const char * filepath_sunat,const char * filepath_reniec,con
 
     if (!people)
       goto handle_error;
-    t_array_append(persona, people);
+    t_array_append(personas, people);
   }
   fclose(f);
 
-  if (persona->len == 0)
+  if (personas->len == 0)
     goto handle_error;
 
-  return persona;
+  return personas;
 handle_error:
-  free(persona);
+  free(personas);
   return NULL;
 }
 
