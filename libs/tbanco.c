@@ -130,6 +130,7 @@ void start (int crit1, int crit2) {
 
   // Hace una copia para banco a y hace el sort respectivo a la copia de la DB
   // -- inicia tiempo para banco Ai
+  /*
   printf("Banco A: \n");
   printf("\tCriterio 1: %s\n", buscaCriterio(crit1));
   printf("\tCriterio 2: %s\n", buscaCriterio(crit2));
@@ -139,7 +140,7 @@ void start (int crit1, int crit2) {
   for (i=0; i<personas->len; i++)
     calc_credit_a(copiaBancoA, t_array_index(personas, i));
   printf("Listo :v\n");
-  
+  */
   printf("Banco B: \n");
   printf("\tCriterio 1: %s\n", buscaCriterio(crit1));
   printf("\tCriterio 2: %s\n", buscaCriterio(crit2));
@@ -150,7 +151,7 @@ void start (int crit1, int crit2) {
   for (i=0; i<personas->len; i++)
     calc_credit_b(copiaBancoB, t_array_index(personas, i));
   printf("gg :v\n");
-  
+  /*
   printf("Banco C: \n");
   printf("\tCriterio 1: %s\n", buscaCriterio(crit1));
   printf("\tCriterio 2: %s\n", buscaCriterio(crit2));
@@ -160,4 +161,5 @@ void start (int crit1, int crit2) {
   for (i=0; i<personas->len; i++)
     calc_credit_c(copiaBancoC, t_array_index(personas, i));
   printf("wp :v\n");
+  */
 }

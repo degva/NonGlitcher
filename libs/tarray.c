@@ -38,31 +38,31 @@ void t_array_remove_last (TArr * array) {
 void t_array_full_copy(TArr * src, TArr * des) {
   int i;
   des->len = src->len;
-  for (i=0; i<my_array->len; i++) {                       
-    t_array_append(b,  TYPE(t_array_index(my_array, i)));
+  for (i=0; i<src->len; i++) {                       
+    t_array_append(des,  TYPE(t_array_index(src, i)));
   }                                                       
 }
 
-void returnval (  int crit1 ){
-  if (crit1 == PERSONA_FIRST_NAME)
-    return "dni"
-
-
-}
 //void t_bubble_sort (TArr * array, TCompDataFunc cmp_func){
 void t_bubble_sort (TArr * array, TArr * cmp_funcs){
-  int c, d;    
+  int c, d;
+  TCompFunc cmp_func_1;
+  TCompFunc cmp_func_2;
+
+  cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
+  cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
+
   for (c = 0 ; c < ( 1000 - 1 ); c++)
   {
     for (d = 0 ; d < 1000 - c - 1; d++)
     {
-      if ((TCompDataFunc) t_array_index(cmp_funcs, 0)( array->vector[c] ,array->vector[d]) < 0))) {
+      if ( cmp_func_1( array->vector[c] ,array->vector[d]) < 0) {
         t_swap (array->vector[c], array->vector[d]);
       } else {
-        if ((TCompDataFunc) t_array_index(cmp_funcs, 1)( array->vector[c] ,array->vector[d]) < 0) {
+        if ( cmp_func_2( array->vector[c] ,array->vector[d]) < 0) {
           t_swap (array->vector[c], array->vector[d]);
         }
       }
     }
-
+  }
 }

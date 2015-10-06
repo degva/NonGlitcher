@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "tmsg.h"
 #include "tarray.h"
 #include "menu.h"
+#include "tpersona.h"
+#include "tbanco.h"
 
 int main(int argc, char *argv[])
 {

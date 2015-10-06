@@ -14,11 +14,11 @@ struct _TPersona {
   const char *estado;
   int monto;
   const char *genero;
-  TBoolean char carga ;
-  int riesgo;
-  
+  TBoolean carga;
+  int riesgo;  
 };
-typedef _TPersona TPersona;
+
+typedef struct _TPersona TPersona;
 
 struct _DB_Sunat {
   const char *first_name;
@@ -29,7 +29,9 @@ struct _DB_Sunat {
   const char *fecha;
   const char *estado;
   int monto;
-}; typedef _DB_Sunat DB_Sunat;
+}; 
+
+typedef struct _DB_Sunat DB_Sunat;
 
 struct _DB_Reniec {
   const char *first_name;
@@ -37,8 +39,10 @@ struct _DB_Reniec {
   const char *last_name_m;
   long dni;
   const char *genero;
-  TBoolean char carga ;
-}; typedef _DB_Reniec DB_Reniec;
+  TBoolean carga ;
+}; 
+
+typedef struct _DB_Reniec DB_Reniec;
 
 struct _DB_Infocorp {
   const char *first_name;
@@ -47,7 +51,9 @@ struct _DB_Infocorp {
   long dni;
   int riesgo;
   
-}; typedef _DB_Infocorp DB_Infocorp;
+}; 
+
+typedef struct _DB_Infocorp DB_Infocorp;
 
 
 
@@ -57,8 +63,9 @@ typedef enum {
   PERSONA_LAST_NAME_M,
   PERSONA_DNI
 } PersonaCriteria;
+
 // crea el nuevo persona
-include_persona(DB_Reniec,DB_Sunat,DB_Infocorp); 
+TPersona * include_persona(const DB_Reniec * reniec, const DB_Sunat * sunat , const DB_Infocorp * infocorp);
 // Compare 2 persons by first name
 int p_cmp_fn (tpointer a, tpointer b);
 // Compare 2 persons by last name f
