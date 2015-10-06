@@ -2,16 +2,6 @@
 #include "tpersona.h"
 #include "tarray.h"
 
-
-//lee el archivo del DB_SUNAT
-TArr *people;
-people= p_from_file ("DB_SUNAT.txt","DB_RENIEC.txt","DB_INFOCORP",",");
-
-
-
-
-
-
 float calc_credit_a (TArr * data, TPersona persona) {	
   float riesgo, carga;
   TPersona * per_bus;
@@ -20,24 +10,20 @@ float calc_credit_a (TArr * data, TPersona persona) {
   
   //Establecemos el valor de la carga 
   if (per_bus->carga){
-	carga = 1;
-  }
-  else{
-	carga = 3;
+    carga = 1;
+  } else{
+    carga = 3;
   }
 
   //Establecemos el valor del riesgo	
   if ((per_bus->riesgo >= 1) && (per_bus->riesgo <= 2)){
-	riesgo = 1;
-  }
-  else if ((per_bus->riesgo >= 3) && (per_bus->riesgo <= 5)){
-	riesgo = 0.6;
-  }
-  else if ((per_bus->riesgo >= 6) && (per_bus->riesgo <= 7)){
-	riesgo = 0.2;
-  }
-  else if (per_bus->riesgo >= 8){
-	riesgo = 0;
+    riesgo = 1;
+  } else if ((per_bus->riesgo >= 3) && (per_bus->riesgo <= 5)){
+    riesgo = 0.6;
+  } else if ((per_bus->riesgo >= 6) && (per_bus->riesgo <= 7)){
+    riesgo = 0.2;
+  } else if (per_bus->riesgo >= 8){
+    riesgo = 0;
   }
   
   creditoA = calculaCredito(per_bus->monto, carga, riesgo);
@@ -50,18 +36,16 @@ float calc_credit_b (TArr * data, TPersona persona) {
   
   //Establecemos el valor de la carga 
   if (per_bus->carga){
-	carga = 1;
-  }
-  else{
-	carga = 4;
+    carga = 1;
+  } else{
+    carga = 4;
   }
 
   //Establecemos el valor del riesgo	
   if ((per_bus->riesgo >= 1) && (per_bus->riesgo <= 2)){
-	riesgo = 1;
-  }
-  else if (per_bus->riesgo >= 3){
-	riesgo = 0;
+    riesgo = 1;
+  } else if (per_bus->riesgo >= 3){
+    riesgo = 0;
   }  
   creditoB = calculaCredito(per_bus->monto, carga, riesgo);
   return creditoB;
@@ -73,21 +57,18 @@ float calc_credit_c (TArr * data, TPersona persona) {
   
   //Establecemos el valor de la carga 
   if (per_bus->carga){
-	carga = 2;
-  }
-  else{
-	carga = 3;
+    carga = 2;
+  } else{
+    carga = 3;
   }
 
   //Establecemos el valor del riesgo	
   if (per_bus->riesgo = 1){
-	riesgo = 1;
-  }
-  else if ((per_bus->riesgo >= 2) && (per_bus->riesgo <= 4)){
-	riesgo = 0.4;
-  }
-  else if (per_bus->riesgo >= 5){
-	riesgo = 0;
+    riesgo = 1;
+  } else if ((per_bus->riesgo >= 2) && (per_bus->riesgo <= 4)){
+    riesgo = 0.4;
+  } else if (per_bus->riesgo >= 5){
+    riesgo = 0;
   }
 
   creditoC = calculaCredito(per_bus->monto, carga, riesgo);
@@ -99,6 +80,30 @@ void print_person (TPersona * persona, float credit) {
 }
 
 void start (int crit1, int crit2) {
+
+  TArr * cmp_funcs;
+  cmp_funcs = t_array_new();
+  switch (crit1) {
+    case PERSONA_FIRST_NAME:
+      t_array_append(cmp_funcs, p_cmp_fn);
+    case PERSONA_LAST_NAME_F:
+      t_array_append(cmp_funcs, p_cmp_lnf);
+    case PERSONA_LAST_NAME_M:
+      t_array_append(cmp_funcs, p_cmp_lnm);
+    case PERSONA_DNI:
+      t_array_append(cmp_funcs, p_cmp_dni);
+  }
+
+  switch (crit2) {
+    case PERSONA_FIRST_NAME:
+      t_array_append(cmp_funcs, p_cmp_fn);
+    case PERSONA_LAST_NAME_F:
+      t_array_append(cmp_funcs, p_cmp_lnf);
+    case PERSONA_LAST_NAME_M:
+      t_array_append(cmp_funcs, p_cmp_lnm);
+    case PERSONA_DNI:
+      t_array_append(cmp_funcs, p_cmp_dni);
+  }
 
   // Lee bases de datos y los pone en un arreglo de punteros
   TArr * baseDatos;

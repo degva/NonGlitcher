@@ -5,6 +5,8 @@
 #define _t_alloc_array()      malloc(sizeof (TArr))
 #define _t_realloc_vector(a, sz)  t_alloc(a, tpointer, sz)
 
+#define TYPE(t)   ((void *) (t))
+
 TArr * t_array_new () {
   TArr *array;
   array = _t_alloc_array();
@@ -36,10 +38,9 @@ void t_array_remove_last (TArr * array) {
 void t_array_full_copy(TArr * src, TArr * des) {
   int i;
   des->len = src->len;
-  for (i=0; i<src->len; i++) {
-    t_array_append( 
-  }
-  memcpy(des->vector, src->vector);
+  for (i=0; i<my_array->len; i++) {                       
+    t_array_append(b,  TYPE(t_array_index(my_array, i)));
+  }                                                       
 }
 
 void returnval (  int crit1 ){

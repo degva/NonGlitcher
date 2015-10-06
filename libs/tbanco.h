@@ -2,9 +2,6 @@
 #define TBANCO
 #include "tarray.h"
 
-
-
-
 // Funcion que devuelve el credito usando la formula del
 // banco B
 float calc_credit_a (TArr * data, TPersona persona);
