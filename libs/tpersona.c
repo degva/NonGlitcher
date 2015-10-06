@@ -19,6 +19,10 @@ int p_cmp_lnm (tpointer a, tpointer b) {
   return strcmp(PERSONA(a)->last_name_m, PERSONA(b)->last_name_m);
 }
 
+int p_cmp_dni (tpointer a, tpointer b) {
+  return PERSONA(a)->dni - PERSONA(b)->dni;
+}
+
 TPersona *buscaPersona (TArr *data, TPersona * persona){
   int max, min, mid;
   max = data->len;
@@ -131,6 +135,7 @@ DB_Infocorp * persona_from_string_in(char * str, const char * delimiter ) {
 TPersona * include_persona(const DB_Reniec * reniec, const DB_Sunat * sunat , const DB_Infocorp * infocorp){
 
   TPersona *people ;
+  people = malloc(sizeof(TPersona));
   people -> first_name = reniec ->first_name;
   people -> last_name_f = reniec -> last_name_f;
   people -> last_name_m = reniec -> last_name_m;
@@ -189,4 +194,58 @@ handle_error:
   free(personas);
   return NULL;
 }
+
+
+TArr * p_from_file_2 (const char * filepath, const char * delimiter) {
+
+  TArr *personas;
+  FILE *f;
+  char line[1000];
+
+  int i;
+  char *field[5];
+
+  personas = t_array_new();
+
+  f = fopen(filepath, "r");
+
+  if (!f)
+    goto handle_error;
+
+  while (fgets (line, 1000, f) ) {
+    TPersona *people;
+    
+    for (i=0; i<5; i++) {
+      if (i == 0)
+        field[i] = strdup (strtok (line, delimiter));
+      else
+        field[i] = strtok (NULL, delimiter);
+      if (!field[i])
+        return NULL;
+      else
+        field[i][strlen (field[i]) - 2] = '\0';
+      field[i] = strdup (field[i]);
+    }
+
+    people = malloc(sizeof(TPersona));
+    people->dni = atoi (field[0]);
+    people->first_name = strdup (field[1]);
+    people->last_name_f = strdup (field[2]);
+    people->last_name_m = strdup (field[3]);
+
+    if (!people)
+      goto handle_error;
+    t_array_append(personas, people);
+  }
+  fclose(f);
+
+  if (personas->len == 0)
+    goto handle_error;
+
+  return personas;
+handle_error:
+  free(personas);
+  return NULL;
+}
+
 
