@@ -55,15 +55,7 @@ typedef enum {
   PERSONA_FIRST_NAME,
   PERSONA_LAST_NAME_F,
   PERSONA_LAST_NAME_M,
-  PERSONA_DNI,
-  PERSONA_RUC,
-  PERSONA_FECHA,
-  PERSONA_ESTADO,
-  PERSONA_MONTO,
-  PERSONA_GENERO,
-  PERSONA_CARGA,
-  PERSONA_RIESGO
-
+  PERSONA_DNI
 } PersonaCriteria;
 // crea el nuevo persona
 include_persona(DB_Reniec,DB_Sunat,DB_Infocorp); 

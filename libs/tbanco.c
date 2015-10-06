@@ -81,6 +81,30 @@ void print_person (TPersona * persona, float credit) {
 
 void start (int crit1, int crit2) {
 
+  TArr * cmp_funcs;
+  cmp_funcs = t_array_new();
+  switch (crit1) {
+    case PERSONA_FIRST_NAME:
+      t_array_append(cmp_funcs, p_cmp_fn);
+    case PERSONA_LAST_NAME_F:
+      t_array_append(cmp_funcs, p_cmp_lnf);
+    case PERSONA_LAST_NAME_M:
+      t_array_append(cmp_funcs, p_cmp_lnm);
+    case PERSONA_DNI:
+      t_array_append(cmp_funcs, p_cmp_dni);
+  }
+
+  switch (crit2) {
+    case PERSONA_FIRST_NAME:
+      t_array_append(cmp_funcs, p_cmp_fn);
+    case PERSONA_LAST_NAME_F:
+      t_array_append(cmp_funcs, p_cmp_lnf);
+    case PERSONA_LAST_NAME_M:
+      t_array_append(cmp_funcs, p_cmp_lnm);
+    case PERSONA_DNI:
+      t_array_append(cmp_funcs, p_cmp_dni);
+  }
+
   // Lee bases de datos y los pone en un arreglo de punteros
   TArr * baseDatos;
   // Usaremos copias externas de dicha base de datos
