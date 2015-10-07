@@ -19,5 +19,10 @@ void t_array_full_copy(TArr * src, TArr * des);
 
 //sorting algorithms
 void t_bubble_sort (TArr * array, TArr * cmp_funcs);
+int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs, tpointer * pivote);
+tpointer * choose_pivote(TArr * array, int izq);
+void qs(TArr * array,int izq , int der ,TArr * cmp_funcs );
+void t_quick_sort(TArr * array, TArr *cmp_funcs);
+void t_shaker_sort(TArr * array , TArr * cmp_funcs);
 
 #endif

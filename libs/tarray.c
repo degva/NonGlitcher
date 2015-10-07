@@ -38,7 +38,6 @@ void t_array_remove_last (TArr * array) {
 
 void t_array_full_copy(TArr * src, TArr * des) {
   int i;
-  des->len = src->len;
   for (i=0; i<src->len; i++) {                       
     t_array_append(des,  TYPE(t_array_index(src, i)));
   }                                                       
@@ -69,31 +68,37 @@ void t_bubble_sort (TArr * array, TArr * cmp_funcs){
 }
 
 
-int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs){
- TCompFunc cmp_func_1;
- TCompFunc cmp_func_2;
+int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs, tpointer * pivote){
+  TCompFunc cmp_func_1;
+  TCompFunc cmp_func_2;
 
   cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
   int i , j ; 
-  int izqT=izq;
   j = izq +1;
-  for (i = izq +1 ;i<= der ;i++){
-    if (cmp_func_1(array-> vector[i],array->vector[izqT])>0){
-      t_swap(array->vector[i],array->vector[izqT]);
-    } else if (cmp_func_1(array->vector[i],array->vector[izqT])==0){
-      if (cmp_func_2(array->vector[i],array->vector[izqT])>0){
-        t_swap(array->vector[i],array->vector[izqT]);
+  for (i = izq +1 ;i< der ;i++){
+    if (cmp_func_1(array-> vector[i],pivote)<0){
+      t_swap(array->vector[i],array->vector[j]);
+      j++;
+    } else if (cmp_func_1(array->vector[i],pivote)==0){
+      if (cmp_func_2(array->vector[i],pivote)<0){
+        t_swap(array->vector[i],array->vector[j]);
+        j++;
       }
     }
   }
-  t_swap(&array[izq],&array[j-1]);
+  t_swap(array->vector[izq],array->vector[j-1]);
   return j-1;
+}
+
+tpointer * choose_pivote(TArr * array, int izq) {
+  return t_array_index(array, izq);
 }
 
 void qs(TArr * array,int izq , int der ,TArr * cmp_funcs ){
     if (izq < der ){
-        int pos_pivote = execute_partition(array ,izq ,der,cmp_funcs);
+        tpointer * pivote = choose_pivote(array, izq);
+        int pos_pivote = execute_partition(array ,izq ,der,cmp_funcs, pivote);
         qs(array,izq,pos_pivote -1,cmp_funcs);
         qs(array,pos_pivote +1,der,cmp_funcs);
     }
@@ -112,18 +117,19 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
 
-  for (  i = 0;i<500;i++){
-    TBoolean swapped = FALSE ;
-    for( j = i ; j < 1000-i-1;j++){
+  TBoolean swapped;
+  for (i = 0; i<999/2; i++) {
+    swapped = FALSE;
+    for( j = i ; j < 999-i-1;j++){
       if (cmp_func_1(array-> vector[j],array->vector[j+1])>0){
-      t_swap(array->vector[j],array->vector[j+1]);
-      swapped =TRUE;
-    } else if (cmp_func_1)(array->vector[j],array->vector[j+1]==0){
-      if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
         t_swap(array->vector[j],array->vector[j+1]);
-        swapped = TRUE;
+        swapped =TRUE;
+      } else if (cmp_func_1(array->vector[j],array->vector[j+1]) == 0){
+        if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
+          t_swap(array->vector[j],array->vector[j+1]);
+          swapped = TRUE;
+        }
       }
-    }
 
     }
   }
