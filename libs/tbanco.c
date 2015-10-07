@@ -98,7 +98,7 @@ void calc_credit_c (TArr * data, TPersona * persona, TArr * cmp_funcs) {
 }
 
 void print_person (TPersona * persona, float credit) {
-  printf("+ %.10s \t+ %.10s \t+ %d \t+ %.2f \t\t+\n", persona->first_name, persona->last_name_f, persona->dni, credit);
+  printf("+ %20s \t+ %15s \t+ %10d \t+ %8.2f \t\t+\n", persona->first_name, persona->last_name_f, persona->dni, credit);
 }
 
 void _print_time (clock_t t) {
@@ -167,7 +167,7 @@ void start (int crit1, int crit2) {
 
   // Hace una copia para banco a y hace el sort respectivo a la copia de la DB
   // -- inicia tiempo para banco Ai
-  printf("Banco A: \n");
+  printf("\n\n\nBanco A: \n");
   printf("\tCriterio 1: %d\n", crit1);
   printf("\tCriterio 2: %d\n", crit2);
   printf("\tEjecutando quick sort\n");
@@ -176,14 +176,11 @@ void start (int crit1, int crit2) {
   delta = clock () - start;
   _print_time(delta);
   printf("Determinando el credito para las personas con el banco A\n");
+  printf("+ Nombre \t\t+ Apellido \t\t+ DNI \t\t+ Credito \t\t+\n");
   for (i=0; i<personas->len; i++)
     calc_credit_a(copiaBancoA, t_array_index(personas, i), cmp_funcs);
-  printf("Listo :v\n");
-  printf("Banco B: \n");
-  /*
-  printf("\tCriterio 1: %s\n", buscaCriterio(crit1));
-  printf("\tCriterio 2: %s\n", buscaCriterio(crit2));
-  */
+
+  printf("\n\n\nBanco B: \n");
   printf("\tCriterio 1: %d\n", crit1);
   printf("\tCriterio 2: %d\n", crit2);
   printf("\tBubble Sort\n");
@@ -194,13 +191,13 @@ void start (int crit1, int crit2) {
   _print_time(delta);
   printf("Haciendo el sort a la base de datos usando criterio\n");
   printf("Determinando el credito para las personas con el banco B\n");
-  printf("+ Nombre \t+ Apellido \t+ DNI \t\t+ Credito \t+\n");
+  printf("+ Nombre \t\t+ Apellido \t\t+ DNI \t\t+ Credito \t\t+\n");
   for (i=0; i<personas->len; i++) {
     //calc_credit_b(copiaBancoB, t_array_index(personas, i));
     calc_credit_b(copiaBancoB, t_array_index(personas, i), cmp_funcs);
   }
-  printf("gg :v\n");
-  printf("Banco C: \n");
+
+  printf("\n\n\nBanco C: \n");
   printf("\tCriterio 1: %d\n", crit1);
   printf("\tCriterio 2: %d\n", crit2);
   printf("\tShake Sort\n");
@@ -209,7 +206,7 @@ void start (int crit1, int crit2) {
   delta = clock () - start;
   _print_time(delta);
   printf("Determinando el credito para las personas con el banco C\n");
+  printf("+ Nombre \t\t+ Apellido \t\t+ DNI \t\t+ Credito \t\t+\n");
   for (i=0; i<personas->len; i++)
     calc_credit_c(copiaBancoC, t_array_index(personas, i), cmp_funcs);
-  printf("wp :v\n");
 }

@@ -29,17 +29,23 @@ TPersona *buscaPersona (TArr *data, TPersona * persona, TArr * cmp_funcs){
   min = 0;
 
   TCompFunc cmp_func_1;
-  //TCompFunc cmp_func_2;
+  TCompFunc cmp_func_2;
 
   cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
-  //cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
+  cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
 
   while (min <= max) {
     mid = min + (max-min)/2;
     if (cmp_func_1( PERSONA(data->vector[mid]) , persona) < 0) {
       min = mid + 1;
     } else if (cmp_func_1( PERSONA(data->vector[mid]) , persona) == 0) {
-      return data->vector[min];
+      if (cmp_func_2(PERSONA(data->vector[mid]) , persona) < 0) {
+        min = mid + 1;
+      } else if (cmp_func_2(PERSONA(data->vector[mid]) , persona) == 0) {
+        return data->vector[mid];
+      } else {
+        max = mid - 1;
+      }
     } else {
       max = mid - 1;
     }
