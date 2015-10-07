@@ -76,26 +76,26 @@ int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs){
   cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
   int i , j ; 
-  izqT=izq;
+  int izqT=izq;
   j = izq +1;
   for (i = izq +1 ;i<= der ;i++){
     if (cmp_func_1(array-> vector[i],array->vector[izqT])>0){
       t_swap(array->vector[i],array->vector[izqT]);
-    } else if (cmp_func_1)(array->vector[i],array->vector[izqT]==0){
+    } else if (cmp_func_1(array->vector[i],array->vector[izqT])==0){
       if (cmp_func_2(array->vector[i],array->vector[izqT])>0){
         t_swap(array->vector[i],array->vector[izqT]);
       }
     }
   }
-  t_swap(&array[izq],&A[j-1]);
+  t_swap(&array[izq],&array[j-1]);
   return j-1;
 }
 
 void qs(TArr * array,int izq , int der ,TArr * cmp_funcs ){
     if (izq < der ){
         int pos_pivote = execute_partition(array ,izq ,der,cmp_funcs);
-        qs(A,izq,pos_pivote -1);
-        qs(A,pos_pivote +1,der);
+        qs(array,izq,pos_pivote -1,cmp_funcs);
+        qs(array,pos_pivote +1,der,cmp_funcs);
     }
 }
 
@@ -112,9 +112,9 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
 
-  for ( int i = 0;i<500;i++){
-    Tboolean swapped = false ;
-    for(int j = i ; j < 1000-i-1);j++{
+  for (  i = 0;i<500;i++){
+    TBoolean swapped = FALSE ;
+    for( j = i ; j < 1000-i-1;j++){
       if (cmp_func_1(array-> vector[j],array->vector[j+1])>0){
       t_swap(array->vector[j],array->vector[j+1]);
       swapped =TRUE;
@@ -130,8 +130,8 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   for(j = 500 -2 -i; j > i ;j-- ){
     if (cmp_func_1(array-> vector[j],array->vector[j+1])>0){
       t_swap(array->vector[j],array->vector[j+1]);
-      swapped =TRUE;
-    } else if (cmp_func_1)(array->vector[j],array->vector[j+1]==0){
+        swapped =TRUE;
+    } else if ((cmp_func_1)(array->vector[j],array->vector[j+1])==0){
       if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
         t_swap(array->vector[j],array->vector[j+1]);
         swapped = TRUE;
