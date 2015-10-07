@@ -4,7 +4,7 @@
 85932496,Fausto German,Mendez,Muñoz
 34326026,Humberto Fabian,Arevalo,Rosenthal
 75518867,Edgar Celso,Garcia,Arce
-40407458,Eusebio Walter,Paredes Valderrama
+40407458,Eusebio Walter,Paredes,Valderrama
 11211222,Luis Yolfer,Ortega,Peña
 67416697,Jaime Celso,Martinez,Tasso
 69267372,Erick Fabian,Zapata,Cabrera
@@ -14,7 +14,7 @@
 11034072,Flavio Renato,Olortegui,Polo
 26372788,Waldo Homero,Muente,Heresi
 58331261,Alberto Cayetano,Arias,Plascencia
-98640221,Jose Lorenzo,Suarez Rondon
+98640221,Jose Lorenzo,Suarez,Rondon
 26728503,Mijail Alejandro,Cordova,Castro
 98182477,Teofilo Leonardo,Diaz,Gil
 09583137,Cesar Mateo,Garcia,Benites

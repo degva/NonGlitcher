@@ -23,19 +23,24 @@ int p_cmp_dni (tpointer a, tpointer b) {
   return PERSONA(a)->dni - PERSONA(b)->dni;
 }
 
-TPersona *buscaPersona (TArr *data, TPersona * persona){
+TPersona *buscaPersona (TArr *data, TPersona * persona, TArr * cmp_funcs){
   int max, min, mid;
   max = data->len;
   min = 0;
-  while (min < max) {
+
+  TCompFunc cmp_func_1;
+  //TCompFunc cmp_func_2;
+
+  cmp_func_1 = (TCompFunc) t_array_index(cmp_funcs, 0);
+  //cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
+
+  while (min <= max) {
     mid = min + (max-min)/2;
-    if (PERSONA(data->vector[min])->dni == persona->dni){
-      return data->vector[min];
-    }
-    else if (PERSONA(data->vector[min])->dni < persona->dni){
+    if (cmp_func_1( PERSONA(data->vector[mid]) , persona) < 0) {
       min = mid + 1;
-    }
-    else {
+    } else if (cmp_func_1( PERSONA(data->vector[mid]) , persona) == 0) {
+      return data->vector[min];
+    } else {
       max = mid - 1;
     }
   }
@@ -56,8 +61,6 @@ DB_Sunat * persona_from_string_su(char * str, const char * delimiter ) {
       field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
-    else
-      field[i][strlen (field[i]) - 2] = '\0';
     field[i] = strdup (field[i]);
   }
 
@@ -86,12 +89,10 @@ DB_Reniec * persona_from_string_re(char * str, const char * delimiter ) {
       field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
-    else
-      field[i][strlen (field[i]) - 2] = '\0';
     field[i] = strdup (field[i]);
   }
 
-  reniec = malloc(sizeof(DB_Sunat));
+  reniec = malloc(sizeof(DB_Reniec));
   reniec->dni = atoi (field[0]);
   reniec->first_name = strdup (field[1]);
   reniec->last_name_f = strdup (field[2]);
@@ -117,12 +118,10 @@ DB_Infocorp * persona_from_string_in(char * str, const char * delimiter ) {
       field[i] = strtok (NULL, delimiter);
     if (!field[i])
       return NULL;
-    else
-      field[i][strlen (field[i]) - 2] = '\0';
     field[i] = strdup (field[i]);
   }
 
-  infocorp = malloc(sizeof(DB_Sunat));
+  infocorp = malloc(sizeof(DB_Infocorp));
   infocorp -> dni = atoi (field[0]);
   infocorp -> first_name = strdup (field[1]);
   infocorp->last_name_f = strdup (field[2]);
@@ -171,13 +170,13 @@ TArr * p_from_file (const char * filepath_sunat,const char * filepath_reniec,con
 
   while (fgets (line, 1000, f) && fgets(line1,1000,f1) && fgets(line2,1000,f2)) {
     TPersona *people;
-    DB_Sunat *sunat;
     DB_Reniec *reniec;
+    DB_Sunat *sunat;
     DB_Infocorp *infocorp ;
     
-    reniec = persona_from_string_re(line1,delimiter);
+    reniec = persona_from_string_re(line2,delimiter);
     sunat = persona_from_string_su(line, delimiter);
-    infocorp= persona_from_string_in(line2,delimiter);
+    infocorp= persona_from_string_in(line1,delimiter);
     people = include_persona(reniec,sunat,infocorp);
 
     if (!people)
@@ -185,6 +184,8 @@ TArr * p_from_file (const char * filepath_sunat,const char * filepath_reniec,con
     t_array_append(personas, people);
   }
   fclose(f);
+  fclose(f1);
+  fclose(f2);
 
   if (personas->len == 0)
     goto handle_error;
@@ -203,7 +204,7 @@ TArr * p_from_file_2 (const char * filepath, const char * delimiter) {
   char line[1000];
 
   int i;
-  char *field[5];
+  char *field[4];
 
   personas = t_array_new();
 
@@ -215,15 +216,13 @@ TArr * p_from_file_2 (const char * filepath, const char * delimiter) {
   while (fgets (line, 1000, f) ) {
     TPersona *people;
     
-    for (i=0; i<5; i++) {
+    for (i=0; i<4; i++) {
       if (i == 0)
         field[i] = strdup (strtok (line, delimiter));
       else
         field[i] = strtok (NULL, delimiter);
       if (!field[i])
         return NULL;
-      else
-        field[i][strlen (field[i]) - 2] = '\0';
       field[i] = strdup (field[i]);
     }
 

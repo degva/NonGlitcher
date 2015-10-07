@@ -1,5 +1,5 @@
 GCC=gcc
-CFLAGS=-Wall
+CFLAGS=-g -Wall -Wextra
 
 LDIR=libs
 ODIR=objs

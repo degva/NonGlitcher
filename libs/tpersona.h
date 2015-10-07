@@ -73,7 +73,7 @@ int p_cmp_lnf (tpointer a, tpointer b);
 // Compare 2 persons by last name m
 int p_cmp_lnm (tpointer a, tpointer b);
 int p_cmp_dni (tpointer a, tpointer b);
-TPersona * buscaPersona (TArr * data, TPersona * persona);
+TPersona * buscaPersona (TArr * data, TPersona * persona, TArr * cmp_funcs);
 // Create a persona from a string
 TPersona * persona_from_string(char * str, const char * delimiter);
 // read data from database

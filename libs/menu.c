@@ -19,7 +19,7 @@ void _print_list (TArr *items) {
   }
 }
 
-tpointer retrieve_opt (TArr *items, char msg[]) {
+int retrieve_opt (TArr *items, char msg[]) {
   int opt;
   if (strcmp(msg, "") == 0)
     _show_message("Select any of the options below:");
@@ -29,5 +29,5 @@ tpointer retrieve_opt (TArr *items, char msg[]) {
   _print_list(items);
   printf("Select > ");
   scanf("%d", &opt);
-  return t_array_index(items, opt);
+  return opt;
 }

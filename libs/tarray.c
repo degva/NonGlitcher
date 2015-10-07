@@ -4,6 +4,7 @@
 #define t_alloc(a,t,sz)       realloc(a, sz * sizeof(t))
 #define _t_alloc_array()      malloc(sizeof (TArr))
 #define _t_realloc_vector(a, sz)  t_alloc(a, tpointer, sz)
+#define t_swap(a, b)    do { typeof(a) t; t = a; a = b; b = t; } while(0)
 
 #define TYPE(t)   ((void *) (t))
 
@@ -54,13 +55,13 @@ void t_bubble_sort (TArr * array, TArr * cmp_funcs){
 
   for (c = 0 ; c < ( 1000 - 1 ); c++)
   {
-    for (d = 0 ; d < 1000 - c - 1; d++)
+    for (d = 0 ; d < ( 1000 - c - 1); d++)
     {
-      if ( cmp_func_1( array->vector[c] ,array->vector[d]) < 0) {
-        t_swap (array->vector[c], array->vector[d]);
-      } else {
-        if ( cmp_func_2( array->vector[c] ,array->vector[d]) < 0) {
-          t_swap (array->vector[c], array->vector[d]);
+      if ( cmp_func_1( array->vector[d], array->vector[d+1]) > 0) {
+        t_swap (array->vector[d], array->vector[d+1]);
+      } else if ( cmp_func_1( array->vector[d] ,array->vector[d+1]) == 0) { 
+        if ( cmp_func_2( array->vector[d] ,array->vector[d+1]) > 0) {
+          t_swap (array->vector[d], array->vector[d+1]);
         }
       }
     }
