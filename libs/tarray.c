@@ -83,7 +83,7 @@ int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs){
       t_swap(array->vector[i],array->vector[izqT]);
     } else if (cmp_func_1)(array->vector[i],array->vector[izqT]==0){
       if (cmp_func_2(array->vector[i],array->vector[izqT])>0){
-        t_swap(array->vector[i],array->vector[izqT])>0);
+        t_swap(array->vector[i],array->vector[izqT]);
       }
     }
   }
@@ -120,8 +120,8 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
       swapped =TRUE;
     } else if (cmp_func_1)(array->vector[j],array->vector[j+1]==0){
       if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
-        t_swap(array->vector[j],array->vector[j+1])>0);
-    swapped = TRUE;
+        t_swap(array->vector[j],array->vector[j+1]);
+        swapped = TRUE;
       }
     }
 
@@ -133,8 +133,8 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
       swapped =TRUE;
     } else if (cmp_func_1)(array->vector[j],array->vector[j+1]==0){
       if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
-        t_swap(array->vector[j],array->vector[j+1])>0);
-    swapped = TRUE;
+        t_swap(array->vector[j],array->vector[j+1]);
+        swapped = TRUE;
       }
     }
     if (!swapped) break;
