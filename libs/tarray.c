@@ -77,11 +77,11 @@ int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs, tpointe
   int i , j ; 
   j = izq +1;
   for (i = izq +1 ;i< der ;i++){
-    if (cmp_func_1(array-> vector[i],pivote)<0){
+    if (cmp_func_1(array-> vector[i],pivote) < 0){
       t_swap(array->vector[i],array->vector[j]);
       j++;
     } else if (cmp_func_1(array->vector[i],pivote)==0){
-      if (cmp_func_2(array->vector[i],pivote)<0){
+      if (cmp_func_2(array->vector[i],pivote) < 0){
         t_swap(array->vector[i],array->vector[j]);
         j++;
       }
@@ -120,12 +120,12 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   TBoolean swapped;
   for (i = 0; i<999/2; i++) {
     swapped = FALSE;
-    for( j = i ; j < 999-i-1;j++){
-      if (cmp_func_1(array-> vector[j],array->vector[j+1])>0){
+    for( j = i ; j < 999-i-1;j++) {
+      if (cmp_func_1(array-> vector[j],array->vector[j+1]) > 0){
         t_swap(array->vector[j],array->vector[j+1]);
         swapped =TRUE;
       } else if (cmp_func_1(array->vector[j],array->vector[j+1]) == 0){
-        if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
+        if (cmp_func_2(array->vector[j],array->vector[j+1]) > 0){
           t_swap(array->vector[j],array->vector[j+1]);
           swapped = TRUE;
         }
@@ -134,11 +134,11 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
     }
   }
   for(j = 500 -2 -i; j > i ;j-- ){
-    if (cmp_func_1(array-> vector[j],array->vector[j+1])>0){
+    if (cmp_func_1(array-> vector[j],array->vector[j+1]) > 0){
       t_swap(array->vector[j],array->vector[j+1]);
         swapped =TRUE;
-    } else if ((cmp_func_1)(array->vector[j],array->vector[j+1])==0){
-      if (cmp_func_2(array->vector[j],array->vector[j+1])>0){
+    } else if ((cmp_func_1)(array->vector[j],array->vector[j+1]) == 0){
+      if (cmp_func_2(array->vector[j],array->vector[j+1]) > 0){
         t_swap(array->vector[j],array->vector[j+1]);
         swapped = TRUE;
       }
