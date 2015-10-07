@@ -76,7 +76,7 @@ int execute_partition(TArr *array , int izq , int der ,TArr * cmp_funcs, tpointe
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
   int i , j ; 
   j = izq +1;
-  for (i = izq +1 ;i< der ;i++){
+  for (i = izq +1 ;i<= der ;i++){
     if (cmp_func_1(array-> vector[i],pivote) < 0){
       t_swap(array->vector[i],array->vector[j]);
       j++;
@@ -105,9 +105,8 @@ void qs(TArr * array,int izq , int der ,TArr * cmp_funcs ){
 }
 
 void t_quick_sort(TArr * array, TArr *cmp_funcs){
-
-     qs ( array , 0 , 1000 , cmp_funcs ) ;
- }
+  qs ( array, 0, 999, cmp_funcs);
+}
 
 void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   int i , j;
@@ -118,9 +117,9 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
   cmp_func_2 = (TCompFunc) t_array_index(cmp_funcs, 1);
 
   TBoolean swapped;
-  for (i = 0; i<999/2; i++) {
+  for (i = 0; i<1000/2; i++) {
     swapped = FALSE;
-    for( j = i ; j < 999-i-1;j++) {
+    for( j = i ; j < 1000 -i -1;j++) {
       if (cmp_func_1(array-> vector[j],array->vector[j+1]) > 0){
         t_swap(array->vector[j],array->vector[j+1]);
         swapped =TRUE;
@@ -133,7 +132,7 @@ void t_shaker_sort(TArr * array , TArr * cmp_funcs){
 
     }
   }
-  for(j = 500 -2 -i; j > i ;j-- ){
+  for(j = 1000 -2 -i; j > i ;j-- ){
     if (cmp_func_1(array-> vector[j],array->vector[j+1]) > 0){
       t_swap(array->vector[j],array->vector[j+1]);
         swapped =TRUE;
